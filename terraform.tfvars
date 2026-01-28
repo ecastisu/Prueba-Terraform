@@ -3,7 +3,7 @@
 # Edita estos valores según tu entorno
 # ====================================
 
-aws_region  = "eu-west-1"
+aws_region  = "us-east-1"
 environment = "dev"
 
 # ⚠️ Debe ser ÚNICO a nivel global en AWS
