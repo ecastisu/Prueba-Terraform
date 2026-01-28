@@ -3,6 +3,10 @@ name: Terraform CI - S3 (No Apply)
 on:
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -11,12 +15,19 @@ jobs:
       # 1️⃣ Clona el repositorio
       - name: Checkout repo
         uses: actions/checkout@v4
+        
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ vars.AWS_REGION }}
 
       # 2️⃣ Instala Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.6.6
+      
 
       # 3️⃣ Inicializa Terraform
       - name: Terraform Init
@@ -31,5 +42,5 @@ jobs:
         run: terraform validate
 
       # 6️⃣ 🔥 AQUÍ va el plan
-      #- name: Terraform Plan
-         #run: terraform plan -var-file="terraform.tfvars"
+      - name: Terraform Plan
+        run: terraform plan -var-file="terraform.tfvars"
