@@ -1,9 +1,7 @@
 name: Terraform CI - S3 (No Apply)
 
 on:
-  pull_request:
-  push:
-    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   terraform:
@@ -33,5 +31,5 @@ jobs:
         run: terraform validate
 
       # 6️⃣ 🔥 AQUÍ va el plan
-      - name: Terraform Plan
-        run: terraform plan -var-file="terraform.tfvars"
+      #- name: Terraform Plan
+         #run: terraform plan -var-file="terraform.tfvars"
