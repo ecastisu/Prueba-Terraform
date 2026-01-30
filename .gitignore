@@ -1,0 +1,12 @@
+# Carpetas internas de Terraform
+.terraform/
+
+# Archivos de estado (MUY IMPORTANTE)
+*.tfstate
+*.tfstate.backup
+
+# Variables sensibles
+*.tfvars
+
+# Logs
+*.log
